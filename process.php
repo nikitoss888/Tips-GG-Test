@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 require 'MatrixCalculator.php';
 
 header('Content-Type: application/json');
@@ -66,31 +64,10 @@ function calculateRequest(): array {
 
     $operation = $_POST['operation'] ?? '';
 
-    // return [
-    //     'matrixA' => $matrixA,
-    //     'matrixA_isarray' => is_array($matrixA),
-    //     'rowsA' => $rowsA,
-    //     'colsA' => $colsA,
-    //     'matrixB' => $matrixB,
-    //     'matrixB_isarray' => is_array($matrixB),
-    //     'rowsB' => $rowsB,
-    //     'colsB' => $colsB,
-    //     'operation' => $operation,
-    //     'operation_in_array' => in_array($operation, ["add", "sub", "mult", "transpA", "transpB"])
-    // ];
-
     if (!in_array($operation, ["add", "sub", "mult", "transpA", "transpB"])) {
         return ['success' => false, 'error' => "Невідома операція"];
     }
-
-    // return [
-    //     'matrixA' => $matrixA,
-    //     'rowsA' => $rowsA,
-    //     'colsA' => $colsA,
-    //     'matrixB' => $matrixB,
-    //     'rowsB' => $rowsB,
-    //     'colsB' => $colsB,
-    // ];
+    
     $matrixCalculator = new MatrixCalculator($matrixA, $rowsA, $colsA, $matrixB, $rowsB, $colsB);
 
     try {
