@@ -133,8 +133,8 @@ class MatrixCalculator {
     public function multiply(): array {
         if ($this->colsA !== $this->rowsB) {
             throw new Exception(
-                "Кількість стовпців матриці A ({$this->colsA})
-                має дорівнювати кількості рядків матриці B ({$this->rowsB})");
+                "Кількість стовпців матриці A ({$this->colsA}) " .
+                "має дорівнювати кількості рядків матриці B ({$this->rowsB})");
         }
 
         $result = array_fill(0, $this->rowsA, array_fill(0, $this->colsB, 0));
