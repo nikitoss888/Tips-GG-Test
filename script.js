@@ -90,6 +90,9 @@ function calculate() {
 }
 
 function formReset() {
+    document.getElementById('matricesInputs').classList.add('hide');
+    document.getElementById('results').parentElement.classList.add('hide');
+
     document.getElementById('matrixAInputs').innerHTML = "";
     document.getElementById('matrixBInputs').innerHTML = "";
     
@@ -97,11 +100,15 @@ function formReset() {
     rowsAInput.disabled = colsAInput.disabled = rowsBInput.disabled = colsBInput.disabled = false;
     
     document.getElementById('results').innerHTML = "";
+
+    rowsAInput.value = colsAInput.value = rowsBInput.value = colsBInput.value = 1;
+    operationInput.value = 'add';
 }
 
 
 
 function showCalculateForm(matrixA, matrixB) {
+    document.getElementById('matricesInputs').classList.remove('hide');
     document.getElementById('matrixAInputs').innerHTML = generateMatrixInputs(matrixA, "A");
     document.getElementById('matrixBInputs').innerHTML = generateMatrixInputs(matrixB, "B");
     
@@ -113,18 +120,18 @@ function generateMatrixInputs(matrix, type) {
     let rows = matrix.length
     let cols = matrix[0].length
 
-    let html = `<p>Матриця ${type}</p>`;
+    let html = `<h3>Матриця ${type}</h3>`;
     html += '<table>';
     html += '<tr><td/>'
 
     for (let i = 0; i < cols; i++) {
-        html += `<td class='table-head'>#${i + 1}</td>`;
+        html += `<td class='index'>#${i + 1}</td>`;
     }
 
     html += '</tr>';
 
     for (let i = 0; i < rows; i++) {
-        html += `<tr><td class='table-head'>#${i + 1}</td>`;
+        html += `<tr><td class='index'>#${i + 1}</td>`;
         for (let j = 0; j < cols; j++) {
             html += `<td><input type='number' name='matrix${type}[][]' value=${matrix[i][j]} required></td>`;
         }
@@ -152,18 +159,18 @@ function showResults(matrix) {
     let rows = matrix.length
     let cols = matrix[0].length
 
-    let html = `<p>Результат операції</p>`;
+    let html = `<h3>Результат операції</h3>`;
     html += '<table>';
     html += '<tr><td/>'
 
     for (let i = 0; i < cols; i++) {
-        html += `<td class='table-head'>#${i + 1}</td>`;
+        html += `<td class='index'>#${i + 1}</td>`;
     }
 
     html += '</tr>';
 
     for (let i = 0; i < rows; i++) {
-        html += `<tr><td class='table-head'>#${i + 1}</td>`;
+        html += `<tr><td class='index'>#${i + 1}</td>`;
         for (let j = 0; j < cols; j++) {
             html += `<td>${matrix[i][j]}</td>`;
         }
@@ -172,4 +179,5 @@ function showResults(matrix) {
     html += '</table>';
     
     document.getElementById('results').innerHTML = html;
+    document.getElementById('results').parentElement.classList.remove('hide');
 }
